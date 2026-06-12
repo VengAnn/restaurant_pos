@@ -1,14 +1,22 @@
-import { useState } from 'react'
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Home, Orders, Auth, Tables, Menu } from "./pages";
+import Header from "./components/shared/Header";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1 className='text-red-500 underline'>Hello World!!</h1>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/order" element={<Orders />} />
+          <Route path="/tables" element={<Tables />} />
+          <Route path="/menu" element={<Menu />} />
+        </Routes>
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
