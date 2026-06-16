@@ -8,19 +8,19 @@ const CustomerInfo = () => {
   const customerData = useSelector((state) => state.customer);
 
   return (
-    <div className="flex items-center justify-between px-4 py-3">
-      <div className="flex flex-col items-start">
-        <h1 className="text-md text-[#f5f5f5] font-semibold tracking-wide">
-          {customerData.customerName}
+    <div className="flex items-center justify-between px-4 py-3 bg-bg-secondary text-text-primary">
+      <div className="flex flex-col items-start min-w-0 pr-2">
+        <h1 className="text-md text-text-primary font-bold tracking-wide truncate w-full">
+          {customerData.customerName || "Walk-in Customer"}
         </h1>
-        <p className="text-xs text-[#ababab] font-medium mt-1">
-          #{customerData.orderId} / Dine in
+        <p className="text-xs text-text-secondary font-medium mt-1">
+          #{customerData.orderId ? customerData.orderId.toString().slice(-6).toUpperCase() : "New Order"} / Dine in
         </p>
-        <p className="text-xs text-[#ababab] font-medium mt-2">
+        <p className="text-xs text-text-secondary font-medium mt-2">
           {formatDate(dateTime)}
         </p>
       </div>
-      <button className="bg-[#f6b100] p-3 text-xl font-bold rounded-lg text-black">
+      <button className="bg-[#f6b100] p-3 text-lg font-bold rounded-lg text-black shrink-0">
         {getAvatarName(customerData.customerName) || "CN"}
       </button>
     </div>

@@ -12,7 +12,10 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
     "@tailwindcss/vite": "^4.3.0",
+    "@tanstack/react-query": "^5.101.0",
+    "axios": "^1.17.0",
     "framer-motion": "^12.40.0",
+    "notistack": "^3.0.2",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-icons": "^5.6.0",

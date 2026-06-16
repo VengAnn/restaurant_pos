@@ -19,7 +19,7 @@ const BottomNav = () => {
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   //state for guest count
-  const [guestCount, setguestCount] = useState(0);
+  const [guestCount, setguestCount] = useState(1);
   //state for modal visibility
   const [isModelOpen, setIsModalOpen] = useState(false);
 
@@ -48,105 +48,111 @@ const BottomNav = () => {
     // Reset inputs
     setCustomerName("");
     setCustomerPhone("");
-    setguestCount(0);
+    setguestCount(1);
     navigate("/tables");
   };
 
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around">
+    <div className="fixed bottom-0 left-0 right-0 bg-bg-secondary border-t border-border-color p-2 h-16 flex justify-around items-center z-40 transition-colors duration-150">
       <button
         onClick={() => navigate("/")}
-        className={`flex items-center justify-center w-[200px] ${
+        className={`flex items-center justify-center py-2 px-3 sm:px-6 w-full max-w-[140px] transition-all cursor-pointer ${
           isActive("/")
-            ? "text-[#f5f5f5] bg-[#343434] rounded-[20px]"
-            : "text-[#ababab]"
+            ? "text-text-primary bg-bg-card-hover rounded-[20px] font-semibold shadow-sm"
+            : "text-text-secondary hover:text-text-primary"
         }`}
       >
-        <FaHome className="inline mr-4" size={20} /> <p>Home</p>
+        <FaHome className="text-xl md:mr-2" />
+        <span className="hidden md:inline text-sm">Home</span>
       </button>
+
       <button
         onClick={() => navigate("/order")}
-        className={`flex items-center justify-center w-[200px] ${
+        className={`flex items-center justify-center py-2 px-3 sm:px-6 w-full max-w-[140px] transition-all cursor-pointer ${
           isActive("/order")
-            ? "text-[#f5f5f5] bg-[#343434] rounded-[20px]"
-            : "text-[#ababab]"
+            ? "text-text-primary bg-bg-card-hover rounded-[20px] font-semibold shadow-sm"
+            : "text-text-secondary hover:text-text-primary"
         }`}
       >
-        <MdOutlineReorder className="inline mr-4" size={20} /> <p>Orders</p>
+        <MdOutlineReorder className="text-xl md:mr-2" />
+        <span className="hidden md:inline text-sm">Orders</span>
       </button>
+
+      {/* Spacer to make room for absolute central FAB on small screens */}
+      <div className="w-14 sm:w-16 md:w-0 shrink-0" />
 
       <button
         onClick={() => navigate("/tables")}
-        className={`flex items-center justify-center w-[200px] ${
+        className={`flex items-center justify-center py-2 px-3 sm:px-6 w-full max-w-[140px] transition-all cursor-pointer ${
           isActive("/tables")
-            ? "text-[#f5f5f5] bg-[#343434] rounded-[20px]"
-            : "text-[#ababab]"
+            ? "text-text-primary bg-bg-card-hover rounded-[20px] font-semibold shadow-sm"
+            : "text-text-secondary hover:text-text-primary"
         }`}
       >
-        <MdTableBar className="inline mr-4" size={20} /> <p>Tables</p>
+        <MdTableBar className="text-xl md:mr-2" />
+        <span className="hidden md:inline text-sm">Tables</span>
       </button>
 
-      <button className="flex items-center justify-center text-[#ababab] w-[200px]">
-        <CiCircleMore className="inline mr-4" size={20} /> <p>More</p>
+      <button className="flex items-center justify-center py-2 px-3 sm:px-6 w-full max-w-[140px] text-text-secondary hover:text-text-primary transition-all cursor-pointer">
+        <CiCircleMore className="text-xl md:mr-2" />
+        <span className="hidden md:inline text-sm">More</span>
       </button>
 
+      {/* Center FAB button */}
       <button
         disabled={isActive("/tables") || isActive("/menu")}
         onClick={openModal}
-        className="absolute bottom-6 bg-[#F6B100] text-[#f5f5f5] rounded-full p-4 items-center"
+        className="absolute bottom-4 bg-[#F6B100] text-black rounded-full p-4 items-center shadow-lg hover:scale-110 active:scale-95 disabled:opacity-50 disabled:pointer-events-none transition-all duration-150 cursor-pointer z-50 border-4 border-bg-primary"
       >
-        <BiSolidDish size={40} />
+        <BiSolidDish className="text-3xl" />
       </button>
 
       {/* Modal component */}
       <Modal isOpen={isModelOpen} onClose={closeModal} title="Create Order">
         <div>
-          {/* lable customer | input customer name */}
-          <label className="block text-[#ababab] mb-2 text-sm font-medium">
+          <label className="block text-text-secondary mb-2 text-sm font-medium">
             Customer Name
           </label>
-          <div className="flex items-center rounded-lg p-3 px-4 bg-[#1f1f1f]">
+          <div className="flex items-center rounded-lg p-3 px-4 bg-bg-input">
             <input
               type="text"
               placeholder="Enter customer name"
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              className="bg-transparent flex-1 text-white focus:outline-none"
+              className="bg-transparent flex-1 text-text-primary focus:outline-none text-sm"
             />
           </div>
 
-          {/* lable customer phone | input customer phone */}
-          <label className="block text-[#ababab] mb-2 mt-3 text-sm font-medium">
+          <label className="block text-text-secondary mb-2 mt-4 text-sm font-medium">
             Customer Phone
           </label>
-          <div className="flex items-center rounded-lg p-3 px-4 bg-[#1f1f1f]">
+          <div className="flex items-center rounded-lg p-3 px-4 bg-bg-input">
             <input
               type="text"
               placeholder="0974849555"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              className="bg-transparent flex-1 text-white focus:outline-none"
+              className="bg-transparent flex-1 text-text-primary focus:outline-none text-sm"
             />
           </div>
 
           <div>
-            <label className="block mb-2 mt-3 text-sm font-medium text-[#ababab]">
-              Guest
+            <label className="block mb-2 mt-4 text-sm font-medium text-text-secondary">
+              Guests
             </label>
-            {/* btn increase & decrease the number of guests */}
-            <div className="flex items-center justify-between bg-[#1f1f1f] px-4 py-3 rounded-lg">
+            <div className="flex items-center justify-between bg-bg-input px-4 py-3 rounded-lg">
               <button
                 onClick={decrementGuest}
-                className="text-yellow-500 text-2xl"
+                className="text-yellow-500 text-2xl font-bold hover:text-yellow-400 select-none cursor-pointer"
               >
                 &minus;
               </button>
-              <span className="text-white">{guestCount} Person</span>
+              <span className="text-text-primary text-sm font-medium">{guestCount} Person</span>
               <button
                 onClick={incrementGuest}
-                className="text-yellow-500 text-2xl"
+                className="text-yellow-500 text-2xl font-bold hover:text-yellow-400 select-none cursor-pointer"
               >
                 &#43;
               </button>
@@ -156,7 +162,7 @@ const BottomNav = () => {
 
         <button
           onClick={handleCreateOrder}
-          className="w-full bg-[#f6B100] text-[#f5f5f5] rounded-lg py-3 mt-10 hover:bg-yellow-700"
+          className="w-full bg-[#f6B100] text-black font-bold rounded-lg py-3 mt-8 hover:bg-yellow-500 active:scale-95 transition-all duration-150 cursor-pointer"
         >
           Create Order
         </button>
